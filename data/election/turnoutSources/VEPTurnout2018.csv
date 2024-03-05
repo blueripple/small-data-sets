@@ -1,0 +1,59 @@
+State,,,,,,,Denominators,,VEP Components (Modifications to VAP to Calculate VEP),,,,,,
+State,VEP Total Ballots Counted,VEP Highest Office,Status,Source,Total Ballots Counted,Votes for Highest Office,Voting-Eligible Population (VEP),Voting-Age Population (VAP),Pct Non-citizen,Prison,Probation,Parole,Total Ineligible Felon,Overseas Eligible,State Abv
+United States,50.3%,49.7%,,,"118,581,921","117,069,210","235,714,420","255,152,703",8.3%,"1,416,810","2,126,035","494,442","3,123,092","4,793,402",
+Alabama,47.3%,47.2%,Certified,https://www.sos.alabama.gov/sites/default/files/voter-pdfs/2018/2018-Official-General-Election-Results-Certified-2018-11-27.pdf,"1,721,906","1,719,589","3,641,209","3,802,714",2.5%,"28,680","52,177","8,562","66,983",,AL
+Alaska,54.6%,54.3%,Official,http://www.elections.alaska.gov/results/18GENR/,"285,009","283,134","521,777","554,426",4.1%,"4,317","6,621","1,812","9,903",,AK
+Arizona,49.1%,48.6%,Certified,https://azsos.gov/sites/default/files/2018%201203%20Signed%20Official%20Statewide%20Canvass.pdf,"2,409,910","2,384,308","4,910,625","5,519,036",9.4%,"37,582","77,373","7,500","89,185",,AZ
+Arkansas,41.4%,41.0%,Official,https://results.enr.clarityelections.com/AR/92174/Web02-state.220747/#/,"898,793","891,509","2,171,940","2,319,740",3.8%,"17,242","30,881","23,792","58,636",,AR
+California,49.6%,48.6%,Certified,https://www.sos.ca.gov/elections/prior-elections/statewide-election-results/general-election-november-6-2018/statement-vote/,"12,712,542","12,464,235","25,635,139","30,836,229",16.4%,"130,390",0,0,"130,390",,CA
+Colorado,63.0%,61.5%,Certified,https://results.enr.clarityelections.com/CO/91808/Web02-state.220747/#/,"2,583,580","2,525,062","4,103,903","4,445,013",7.0%,"18,576",0,"10,186","28,762",,CO
+Connecticut,54.4%,53.8%,Certified,https://ctemspublic.pcctg.net/#/home,"1,421,953","1,406,803","2,614,176","2,856,023",7.8%,"14,475",0,"3,379","17,854",,CT
+Delaware,51.4%,51.0%,Certified,https://elections.delaware.gov/results/html/election.shtml,"365,467","362,592","710,434","769,716",5.7%,"6,254","15,395",387,"15,416",,DE
+District of Columbia,43.7%,42.5%,Certified,https://electionresults.dcboe.org/election_results/2018-General-Election,"231,482","224,658","529,198","577,553",8.4%,0,0,0,0,,DC
+Florida,54.9%,54.3%,Official,https://floridaelectionwatch.gov/Home,"8,318,824","8,220,561","15,140,654","17,168,712",10.5%,"92,847","214,066","4,566","219,431",,FL
+Georgia,55.0%,54.9%,Official,https://results.enr.clarityelections.com/GA/91639/Web02-state.220747/#/,"3,949,905","3,939,328","7,178,075","8,063,141",7.2%,"51,092","410,964","22,386","307,727",,GA
+Hawaii,39.3%,38.5%,Final,https://elections.hawaii.gov/election-results/,"398,657","390,843","1,014,363","1,122,119",9.1%,"5,474",0,0,"5,474",,HI
+Idaho,50.0%,49.4%,Certified,https://sos.idaho.gov/elect/results/2018/General/statewide_totals.html,"612,536","605,131","1,224,275","1,314,172",4.4%,"7,949","32,409","5,054","31,476",,ID
+Illinois,51.4%,50.7%,Official,https://www.elections.il.gov/Downloads/ElectionInformation/VoteTotals/2018GEOfficialVote.pdf,"4,635,541","4,570,842","9,017,850","9,902,219",8.5%,"42,017",0,0,"42,017",,IL
+Indiana,46.9%,46.4%,Official,https://indianaenr.blob.core.usgovcloudapi.net/site/index.html,"2,308,258","2,282,565","4,923,068","5,139,352",3.7%,"24,948",0,0,"24,948",,IN
+Iowa,57.7%,57.4%,Certified,https://results.enr.clarityelections.com/IA/91323/Web02-state.220747/#/,"1,334,279","1,327,638","2,312,204","2,431,468",3.6%,"8,888","29,254","6,051","31,614",,IA
+Kansas,51.2%,50.9%,Official,https://www.kssos.org/elections/18elec/2018_General_Election_Official_Votes_Cast.pdf,"1,060,000","1,055,566","2,072,292","2,211,696",5.2%,"9,613","16,654","4,830","23,936",,KS
+Kentucky,48.6%,47.3%,Certified,https://elect.ky.gov/results/2010-2019/Documents/2018GeneralElectionCertified.pdf,"1,612,353","1,569,798","3,319,907","3,469,061",2.4%,"22,868","48,457","15,383","65,871",,KY
+Louisiana,44.8%,43.0%,Official,https://voterportal.sos.la.gov/Graphical,"1,519,405","1,460,585","3,394,257","3,581,751",2.7%,"35,543","40,174","30,907","89,349",,LA
+Maine,60.2%,59.1%,Certified,https://www.maine.gov/sos/cec/elec/results/index.html,"646,013","634,409","1,073,006","1,092,942",1.8%,0,0,0,0,,ME
+Maryland,54.2%,53.5%,Certified,https://elections.maryland.gov/press_room/index.html,"2,335,128","2,304,512","4,306,482","4,742,399",8.8%,"19,382",0,0,"19,382",,MD
+Massachusetts,54.6%,53.7%,Certified,http://www.sec.state.ma.us/ele/elepdf/2018_Return_of_Votes.pdf,"2,752,665","2,707,090","5,042,403","5,546,080",8.9%,"8,780",0,0,"8,780",,MA
+Michigan,57.8%,56.6%,Official,https://mielections.us/election/results/2018GEN_CENR.html,"4,341,340","4,250,585","7,513,813","7,841,291",3.7%,"40,502",0,0,"40,502",,MI
+Minnesota,64.2%,63.9%,Certified,https://electionresults.sos.state.mn.us/20181106,"2,611,365","2,596,879","4,064,389","4,335,998",4.6%,"10,158","96,852","7,075","72,439",,MN
+Mississippi,43.7%,42.5%,Certified,http://www.sos.ms.gov/Elections-Voting/Pages/2018-General-Election.aspx,"961,025","936,215","2,201,276","2,278,270",1.4%,"19,150","29,067","8,645","44,363",,MS
+Missouri,53.4%,53.4%,Official,https://enr.sos.mo.gov/,"2,442,306","2,442,289","4,570,675","4,764,892",2.5%,"31,956","43,799","17,792","74,713",,MO
+Montana,62.0%,61.4%,Official,https://sosmt.gov/wp-content/uploads/2018GeneralReportStateCanvass.pdf,"509,213","504,384","821,710","835,371",1.2%,"3,795",0,0,"3,795",,MT
+Nebraska,51.8%,51.2%,Official,https://electionresults.sos.ne.gov/,"706,652","698,417","1,364,285","1,458,088",5.5%,"5,079","13,489","1,088","13,856",,NE
+Nevada,47.5%,47.4%,Official,http://www.silverstateelection.com/,"975,980","972,132","2,052,636","2,380,512",12.6%,"13,742","13,724","5,261","26,826",,NV
+New Hampshire,54.6%,54.0%,Final,http://sos.nh.gov/18GenResults.aspx,"580,568","573,608","1,062,391","1,096,918",2.9%,"2,818",0,0,"2,818",,NH
+New Jersey,53.1%,51.8%,Official,https://www.njelections.org/election-information-archive-2018.html,"3,248,642","3,169,310","6,114,344","7,074,259",12.0%,"18,504","140,589","15,128","113,768",,NJ
+New Mexico,47.3%,47.0%,Official,http://electionresults.sos.state.nm.us/,"701,654","696,459","1,482,246","1,610,112",6.9%,"6,914","12,714","2,780","16,941",,NM
+New York,45.2%,44.3%,Certified,https://www.elections.ny.gov/2018ElectionResults.html,"6,230,959","6,104,477","13,772,077","15,748,183",12.0%,"46,416",0,"44,426","90,842",,NY
+North Carolina,49.6%,48.7%,100% Counties Certified,https://er.ncsbe.gov/?election_dt=11/06/2018&county_id=0&office=FED&contest=0,"3,755,778","3,693,104","7,577,011","8,117,590",5.5%,"34,357","82,466","12,726","94,089",,NC
+North Dakota,58.6%,57.8%,Official,https://results.sos.nd.gov/Default.aspx?map=Cty,"330,598","326,138","564,114","578,460",2.2%,"1,791",0,0,"1,791",,ND
+Ohio,50.9%,50.1%,Official,https://www.sos.state.oh.us/elections/election-results-and-data/2018-official-elections-results/,"4,496,834","4,429,582","8,839,520","9,113,230",2.4%,"51,666",0,0,"51,666",,OH
+Oklahoma,42.5%,42.4%,Official,https://www.ok.gov/elections/support/20181106_seb.html,"1,190,000","1,186,385","2,798,385","2,987,070",4.7%,"26,691","33,562","1,895","47,716",,OK
+Oregon,61.5%,60.0%,Official,https://sos.oregon.gov/voting/Pages/current-election.aspx,"1,914,923","1,866,997","3,113,178","3,339,282",6.3%,"15,166",0,0,"15,166",,OR
+Pennsylvania,51.7%,51.4%,Official,https://www.electionreturns.pa.gov/,"5,043,029","5,012,555","9,758,386","10,178,261",3.7%,"48,098",0,0,"48,098",,PA
+Rhode Island,48.1%,47.5%,Official,https://www.ri.gov/election/results/2018/general_election/,"381,267","376,738","793,460","856,988",7.1%,"3,038",0,0,"3,038",,RI
+South Carolina,45.2%,44.7%,Official,https://www.enr-scvotes.org/SC/92124/Web02-state.220747/#/,"1,726,527","1,707,569","3,819,264","3,996,952",3.4%,"20,350","32,634","4,347","43,298",,SC
+South Dakota,53.3%,53.0%,Official,https://sdsos.gov/elections-voting/election-resources/election-history/2018_Election_History.aspx,"341,048","339,214","640,417","663,321",2.5%,"3,744",0,"2,687","6,431",,SD
+Tennessee,45.1%,44.6%,Official,https://sos.tn.gov/products/elections/election-results#2018,"2,267,428","2,243,740","5,031,061","5,290,993",3.5%,"27,906","62,609","12,092","75,685",,TN
+Texas,46.3%,46.3%,Official,https://elections.sos.state.tx.us/elchist331_state.htm,"8,375,000","8,371,655","18,072,155","21,390,152",13.3%,"155,327","374,285","111,287","479,956",,TX
+Utah,52.0%,51.2%,Certified,https://elections.utah.gov/Media/Default/2018%20Election/2018%20General%20Election%20Canvass.pdf,"1,082,972","1,065,630","2,082,549","2,242,122",6.9%,"5,846",0,0,"5,846",,UT
+Vermont,55.9%,55.1%,Official,https://vtelectionresults.sec.state.vt.us/Index.html#/,"278,230","274,087","497,750","508,992",2.2%,0,0,0,0,,VT
+Virginia,54.8%,54.6%,Official,https://results.elections.virginia.gov/vaelections/2018%20November%20General/Site/Congress.html,"3,363,505","3,351,373","6,141,102","6,673,763",6.9%,"36,959","60,821","1,650","73,277",,VA
+Washington,58.9%,58.1%,Final,https://results.vote.wa.gov/results/current/,"3,133,448","3,086,168","5,316,196","5,903,135",8.6%,"18,335","89,317","11,322","80,568",,WA
+West Virginia,42.5%,41.7%,Official,https://results.enr.clarityelections.com/WV/92360/Web02-state.216038/#/,"597,149","586,034","1,405,262","1,435,238",1.1%,"7,137","6,523","3,550","14,405",,WV
+Wisconsin,61.7%,61.6%,Certified,https://elections.wi.gov/node/6300,"2,675,000","2,673,308","4,337,051","4,549,459",3.2%,"22,889","44,489","20,401","68,649",,WI
+Wyoming,48.7%,48.2%,Official,https://soswy.state.wy.us/Elections/Docs/2018/2018GeneralResults.aspx,"205,275","203,420","421,722","438,237",2.4%,"2,323","4,666",842,"5,825",,WY
+,,,,,,,,,,,,,,,
+Notes:,,,,,,,,,,,,,,,
+Louisiana,"The ""Highest Office"" is Constitional Amendment 1: Prohibit felons from public office",,,,,,,,,,,,,,
+North Carolina,"The ""Highest Office"" is Photo Voter ID Referrendum",,,,,,,,,,,,,,
+Utah,"The ""Highest Office"" is Proposition 2 (Medical Marijuana)",,,,,,,,,,,,,,
