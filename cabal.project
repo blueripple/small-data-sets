@@ -18,6 +18,16 @@ source-repository-package
 
 source-repository-package
   type: git
+  location: https://github.com/blueripple/data-tools
+  tag: 373d7d6f51378c3433b413f812343ffa40ced734
+
+source-repository-package
+  type: git
+  location: https://github.com/blueripple/data-types
+  tag: 9dc42657abf42254324f483d878a0b4b4b80b966
+
+source-repository-package
+  type: git
   location: https://github.com/adamConnerSax/knit-haskell
   tag: efd30108b50c523e6b5e62ceb565a21c41b99e03
 
@@ -45,3 +55,13 @@ source-repository-package
   type: git
   location: https://github.com/adamConnerSax/heidi
   tag: 83e0f7e6ba80baaa18ab7daafe7083828fc74d60
+
+source-repository-package
+  type: git
+  location: https://github.com/adamConnerSax/Frames-hvega
+  tag: 72a5103fe6bd6ae6b71c87f885c775d665af1d03
+
+source-repository-package
+  type: git
+  location: https://github.com/adamConnerSax/hvega-utils
+  tag: fd13acbf434cf32e1916d9d084bf138007c82728
