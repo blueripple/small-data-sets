@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE OverloadedStrings   #-}
 {-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE TemplateHaskell #-}
 module BlueRipple.Data.Small.DataSourcePaths where
 
 --import qualified Paths_blueripple_data_sets    as Paths
@@ -8,9 +9,10 @@ import qualified Frames.Streamly.TH            as FS
 import qualified Frames.Streamly.ColumnUniverse as FS
 import qualified Data.Map as M
 import qualified Data.Set as S
+import qualified Language.Haskell.TH.Env as Env
 
 thFramesDataDir :: FilePath
-thFramesDataDir = "./data/"
+thFramesDataDir = fromMaybe "./data/" $$(Env.envQ "BR_SMALL_DATA")
 
 electionDir :: FilePath
 electionDir = "election/"
