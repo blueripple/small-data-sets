@@ -24,7 +24,7 @@ source-repository-package
 source-repository-package
   type: git
   location: https://github.com/blueripple/data-types
-  tag: 9dc42657abf42254324f483d878a0b4b4b80b966
+  tag: 4f9967ff2ac6e25819c3ff6ebc1ce66937f53894
 
 source-repository-package
   type: git

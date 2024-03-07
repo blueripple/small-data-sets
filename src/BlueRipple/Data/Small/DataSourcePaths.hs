@@ -4,7 +4,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 module BlueRipple.Data.Small.DataSourcePaths where
 
---import qualified Paths_blueripple_data_sets    as Paths
+import qualified BlueRipple.Data.CachingCore as BRC
 import qualified Frames.Streamly.TH            as FS
 import qualified Frames.Streamly.ColumnUniverse as FS
 import qualified Data.Map as M
@@ -12,7 +12,7 @@ import qualified Data.Set as S
 import qualified Language.Haskell.TH.Env as Env
 
 thFramesDataDir :: FilePath
-thFramesDataDir = fromMaybe "./data/" $$(Env.envQ "BR_SMALL_DATA")
+thFramesDataDir = fromMaybe "./data/" $ fmap toString $ ($$(Env.envQ "BR_SMALL_DATA_DIR")::Maybe String)  >>= BRC.insureFinalSlash . toText
 
 electionDir :: FilePath
 electionDir = "election/"
