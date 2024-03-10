@@ -11,23 +11,23 @@ import qualified Data.Map as M
 import qualified Data.Set as S
 import qualified Language.Haskell.TH.Env as Env
 
-thFramesDataDir :: FilePath
-thFramesDataDir = fromMaybe "./data/" $ fmap toString $ ($$(Env.envQ "BR_SMALL_DATA_DIR")::Maybe String)  >>= BRC.insureFinalSlash . toText
+dataDir :: FilePath
+dataDir = fromMaybe "./data/" $ fmap toString $ ($$(Env.envQ "BR_SMALL_DATA_DIR")::Maybe String)  >>= BRC.insureFinalSlash . toText
 
 electionDir :: FilePath
-electionDir = "election/"
+electionDir = dataDir ++ "election/"
 
 demographicDir :: FilePath
-demographicDir = "demographic/"
+demographicDir = dataDir ++ "demographic/"
 
 campaignFinanceDir :: FilePath
-campaignFinanceDir = "campaign-finance/"
+campaignFinanceDir = dataDir ++ "campaign-finance/"
 
 dictionariesDir :: FilePath
-dictionariesDir = "dictionaries/"
+dictionariesDir = dataDir ++"dictionaries/"
 
 otherDir :: FilePath
-otherDir = "other/"
+otherDir = dataDir ++ "other/"
 
 totalSpendingCSV :: FilePath
 totalSpendingCSV =
@@ -218,7 +218,7 @@ angryDemsCSV :: FilePath
 angryDemsCSV = otherDir ++ "angryDemsContributions20181203.csv"
 
 framesPath :: FilePath -> FilePath
-framesPath x = thFramesDataDir ++ x
+framesPath x = x
 
 {-
 usePath :: FilePath -> IO FilePath
