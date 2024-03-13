@@ -41,11 +41,8 @@ import qualified Frames.Transform as FT
 import qualified Knit.Report as K
 import qualified Knit.Utilities.Streamly as KS
 
-localDataDir :: Text
-localDataDir :: Text = "../data-sets/data/"
-
 useLocal :: Text -> BRL.DataPath
-useLocal x = BRL.LocalData $ localDataDir <> x
+useLocal = BRL.LocalData
 
 electoralCollegeFrame ::
   (K.KnitEffects r, BRC.CacheEffects r) =>
