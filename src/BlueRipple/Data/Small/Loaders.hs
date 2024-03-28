@@ -167,6 +167,7 @@ electionIntegrityByState2018 = BRL.cachedMaybeFrameLoader
               . (FT.addName @BR.PEIYear @BR.Year)
               . (FT.addName @BR.PEIStateFIPS @BR.StateFIPS)
 
+-- starting with 118th congress/2022, we use 2020 PUMAs
 type CDFromPUMA2012R = FT.ReType BR.CongressionalDistrict GT.CongressionalDistrict
                        (FT.ReType BR.StateAbbreviation GT.StateAbbreviation
                        (F.RecordColumns BR.CDFromPUMA2012))
@@ -182,7 +183,7 @@ cdFromPUMA2012Loader congress = do
     115 -> return (BR.cd115FromPUMA2012CSV, "data/cd115FromPUMA2012.bin")
     116 -> return (BR.cd116FromPUMA2012CSV, "data/cd116FromPUMA2012.bin")
     117 -> return (BR.cd117FromPUMA2012CSV, "data/cd117FromPUMA2012.bin")
-    118 -> return (BR.cd118FromPUMA2012CSV, "data/cd118FromPUMA2012.bin")
+    118 -> return (BR.cd118FromPUMA2020CSV, "data/cd118FromPUMA2020.bin")
     _ -> K.knitError "PUMA for congressional district crosswalk only available for 113th, 114th, 115th, 116th, 117th, 118th congresses"
   BRL.cachedFrameLoader (BRL.LocalData $ toText csvPath) Nothing Nothing id Nothing cacheKey --"cd116FromPUMA2012.bin"
 
@@ -197,7 +198,7 @@ allCDFromPUMA2012Loader = do
       loadWithYear :: (K.KnitEffects r, BRC.CacheEffects r) => (Int, Int) -> K.Sem r (K.ActionWithCacheTime r (F.FrameRec DatedCDFromPUMA2012))
       loadWithYear (year, congress) = fmap (fmap (addYear year)) <$> cdFromPUMA2012Loader congress
   withYears_C <- sequenceA <$> traverse loadWithYear [(2012, 113), (2014, 114), (2016, 115), (2018, 116),(2019,116), (2020,117), (2021, 117), (2022, 118)]
-  BRC.retrieveOrMakeFrame "data/cdFromPUMA2012.bin" withYears_C $ \withYears -> return $ mconcat withYears
+  BRC.retrieveOrMakeFrame "data/cdFromPUMA.bin" withYears_C $ \withYears -> return $ mconcat withYears
 
 {-
 puma2000ToCD116Loader :: (K.KnitEffects r, BRC.CacheEffects r)

@@ -24,7 +24,7 @@ campaignFinanceDir :: FilePath
 campaignFinanceDir = dataDir ++ "campaign-finance/"
 
 dictionariesDir :: FilePath
-dictionariesDir = dataDir ++"dictionaries/"
+dictionariesDir = dataDir ++ "dictionaries/"
 
 otherDir :: FilePath
 otherDir = dataDir ++ "other/"
@@ -168,6 +168,9 @@ puma2012ToCD116CSV = demographicDir ++ "puma2012ToCD116.csv"
 puma2000ToCD116CSV :: FilePath
 puma2000ToCD116CSV = demographicDir ++ "puma2000ToCD116.csv"
 -}
+cd118FromPUMA2020CSV:: FilePath
+cd118FromPUMA2020CSV = dictionariesDir ++ "cd118FromPUMA2020.csv"
+
 cd118FromPUMA2012CSV:: FilePath
 cd118FromPUMA2012CSV = dictionariesDir ++ "cd118FromPUMA2012.csv"
 
