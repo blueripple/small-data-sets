@@ -24,6 +24,7 @@ library
   ghc-options: -Wall
   build-depends:
       blueripple-data-loading
+    , blueripple-post-tools
     , blueripple-data-types
     , Frames >= 0.7 && < 0.8
     , Frames-utils >= 0.3.1

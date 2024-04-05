@@ -8,10 +8,12 @@ allow-newer: polysemy-zoo:ghc-prim, streamly-core
            , cereal-time:time
            , heidi:base
            , generic-trie:base
+           , discrimination:primitive
 
 flags: +streamly9
 
 import: ../cabal_repo_imports/data-tools.project
+import: ../cabal_repo_imports/post-tools.project
 import: ../cabal_repo_imports/data-loading.project
 import: ../cabal_repo_imports/data-types.project
 import: ../cabal_repo_imports/knit-haskell.project

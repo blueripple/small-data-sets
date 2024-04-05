@@ -19,6 +19,7 @@ module BlueRipple.Data.Small.Loaders
   )
 where
 
+import qualified BlueRipple.Utilities.KnitUtils as BRK
 import qualified BlueRipple.Data.Small.DataFrames as BR
 import qualified BlueRipple.Data.Types.Geographic as GT
 import qualified BlueRipple.Data.Types.Election as ET
@@ -45,7 +46,7 @@ useLocal :: Text -> BRL.DataPath
 useLocal = BRL.LocalData
 
 electoralCollegeFrame ::
-  (K.KnitEffects r, BRC.CacheEffects r) =>
+  (BRK.KnitEffects r, BRC.CacheEffects r) =>
   K.Sem r (K.ActionWithCacheTime r (F.Frame BR.ElectoralCollege))
 electoralCollegeFrame = BRL.cachedFrameLoader (BRL.LocalData $ T.pack BR.electorsCSV) Nothing Nothing id Nothing "electoralCollege.bin"
 
@@ -78,7 +79,7 @@ fixPresidentialElectionRow = F.rcast . addCols
         . (FT.addOneFromOne @BR.Party @ET.Party parsePEParty)
 
 presidentialByStateFrame ::
-  (K.KnitEffects r, BRC.CacheEffects r) => K.Sem r (K.ActionWithCacheTime r (F.FrameRec PresidentialElectionCols))
+  (BRK.KnitEffects r, BRC.CacheEffects r) => K.Sem r (K.ActionWithCacheTime r (F.FrameRec PresidentialElectionCols))
 presidentialByStateFrame =
   BRL.cachedMaybeFrameLoader @(F.RecordColumns BR.PresidentialByState) @PEFromCols @PEFromCols @PresidentialElectionCols
     (BRL.LocalData $ toText BR.presidentialByStateCSV)
@@ -93,7 +94,7 @@ presidentialElectionKey :: F.Record PresidentialElectionCols -> (Text, Int)
 presidentialElectionKey r = (F.rgetField @GT.StateAbbreviation r, F.rgetField @BR.Year r)
 
 presidentialElectionsWithIncumbency ::
-  (K.KnitEffects r, BRC.CacheEffects r) =>
+  (BRK.KnitEffects r, BRC.CacheEffects r) =>
   K.Sem r (K.ActionWithCacheTime r (F.FrameRec PresidentialElectionColsI))
 presidentialElectionsWithIncumbency = do
   presidentialElex_C <- presidentialByStateFrame
@@ -134,7 +135,7 @@ type ElectionIntegrityColsRaw = [BR.PEIYear, BR.PEIStateAbbreviation, BR.PEIStat
                                 , BR.PEIResults, BR.PEIResultsi
                                 , BR.PEIEMBs, BR.PEIEMBsi]
 -}
-electionIntegrityByState2016 ::  (K.KnitEffects r, BRC.CacheEffects r) =>
+electionIntegrityByState2016 ::  (BRK.KnitEffects r, BRC.CacheEffects r) =>
   K.Sem r (K.ActionWithCacheTime r (F.FrameRec ElectionIntegrityCols))
 electionIntegrityByState2016 = BRL.cachedMaybeFrameLoader
                                @(F.RecordColumns BR.ElectionIntegrityByState2016)
@@ -151,7 +152,7 @@ electionIntegrityByState2016 = BRL.cachedMaybeFrameLoader
               . (FT.addName @BR.PEIStateFIPS @BR.StateFIPS)
 
 
-electionIntegrityByState2018 ::  (K.KnitEffects r, BRC.CacheEffects r) =>
+electionIntegrityByState2018 ::  (BRK.KnitEffects r, BRC.CacheEffects r) =>
   K.Sem r (K.ActionWithCacheTime r (F.FrameRec ElectionIntegrityCols))
 electionIntegrityByState2018 = BRL.cachedMaybeFrameLoader
                                @(F.RecordColumns BR.ElectionIntegrityByState2018)
@@ -173,7 +174,7 @@ type CDFromPUMA2012R = FT.ReType BR.CongressionalDistrict GT.CongressionalDistri
                        (F.RecordColumns BR.CDFromPUMA2012))
 
 cdFromPUMA2012Loader ::
-  (K.KnitEffects r, BRC.CacheEffects r) =>
+  (BRK.KnitEffects r, BRC.CacheEffects r) =>
   Int ->
   K.Sem r (K.ActionWithCacheTime r (F.FrameRec CDFromPUMA2012R))
 cdFromPUMA2012Loader congress = do
@@ -190,39 +191,39 @@ cdFromPUMA2012Loader congress = do
 type DatedCDFromPUMA2012 = '[BR.Year] V.++ CDFromPUMA2012R
 
 allCDFromPUMA2012Loader ::
-  (K.KnitEffects r, BRC.CacheEffects r) =>
+  (BRK.KnitEffects r, BRC.CacheEffects r) =>
   K.Sem r (K.ActionWithCacheTime r (F.FrameRec DatedCDFromPUMA2012))
 allCDFromPUMA2012Loader = do
   let addYear :: Int -> F.Record CDFromPUMA2012R -> F.Record DatedCDFromPUMA2012
       addYear y r = (y F.&: V.RNil) `V.rappend` r
-      loadWithYear :: (K.KnitEffects r, BRC.CacheEffects r) => (Int, Int) -> K.Sem r (K.ActionWithCacheTime r (F.FrameRec DatedCDFromPUMA2012))
+      loadWithYear :: (BRK.KnitEffects r, BRC.CacheEffects r) => (Int, Int) -> K.Sem r (K.ActionWithCacheTime r (F.FrameRec DatedCDFromPUMA2012))
       loadWithYear (year, congress) = fmap (fmap (addYear year)) <$> cdFromPUMA2012Loader congress
   withYears_C <- sequenceA <$> traverse loadWithYear [(2012, 113), (2014, 114), (2016, 115), (2018, 116),(2019,116), (2020,117), (2021, 117), (2022, 118)]
   BRC.retrieveOrMakeFrame "data/cdFromPUMA.bin" withYears_C $ \withYears -> return $ mconcat withYears
 
 {-
-puma2000ToCD116Loader :: (K.KnitEffects r, BRC.CacheEffects r)
+puma2000ToCD116Loader :: (BRK.KnitEffects r, BRC.CacheEffects r)
                       => K.Sem r (K.ActionWithCacheTime r (F.Frame BR.PUMA2000ToCD116))
 puma2000ToCD116Loader = BRL.cachedFrameLoader (BRL.LocalData $ T.pack BR.puma2000ToCD116CSV) Nothing Nothing id Nothing "puma2000ToCD116.sbin"
 -}
 county2010ToCD116Loader ::
-  (K.KnitEffects r, BRC.CacheEffects r) =>
+  (BRK.KnitEffects r, BRC.CacheEffects r) =>
   K.Sem r (K.ActionWithCacheTime r (F.Frame BR.CountyToCD116))
 county2010ToCD116Loader = BRL.cachedFrameLoader (BRL.LocalData $ toText BR.countyToCD116CSV) Nothing Nothing id Nothing "county2010ToCD116.sbin"
 
 countyToPUMALoader ::
-  (K.KnitEffects r, BRC.CacheEffects r) =>
+  (BRK.KnitEffects r, BRC.CacheEffects r) =>
   K.Sem r (K.ActionWithCacheTime r (F.Frame BR.CountyFromPUMA))
 countyToPUMALoader = BRL.cachedFrameLoader (BRL.LocalData $ toText BR.county2014FromPUMA2012CSV) Nothing Nothing id Nothing "countyFromPUMA.bin"
 
 rawStateAbbrCrosswalkLoader ::
-  (K.KnitEffects r, BRC.CacheEffects r) =>
+  (BRK.KnitEffects r, BRC.CacheEffects r) =>
   K.Sem r (K.ActionWithCacheTime r (F.Frame BR.States))
 rawStateAbbrCrosswalkLoader = BRL.cachedFrameLoader (BRL.LocalData $ toText BR.statesCSV) Nothing Nothing id Nothing "statesRaw.bin"
 {-# INLINEABLE rawStateAbbrCrosswalkLoader #-}
 
 stateAbbrCrosswalkLoader ::
-  (K.KnitEffects r, BRC.CacheEffects r) =>
+  (BRK.KnitEffects r, BRC.CacheEffects r) =>
   K.Sem r (K.ActionWithCacheTime r (F.FrameRec [GT.StateName, GT.StateFIPS, GT.StateAbbreviation, GT.CensusRegionC, GT.CensusDivisionC, BR.OneDistrict, BR.SLDUpperOnly]))
 stateAbbrCrosswalkLoader = do
   statesRaw_C <- rawStateAbbrCrosswalkLoader
@@ -230,24 +231,24 @@ stateAbbrCrosswalkLoader = do
     K.knitEither $ F.toFrame <$> (traverse parseCensusCols $ FL.fold FL.list fRaw)
 {-# INLINEABLE stateAbbrCrosswalkLoader #-}
 
-stateUpperOnlyMap :: (K.KnitEffects r, BRC.CacheEffects r) => K.Sem r (Map Text Bool)
+stateUpperOnlyMap :: (BRK.KnitEffects r, BRC.CacheEffects r) => K.Sem r (Map Text Bool)
 stateUpperOnlyMap = FL.fold (FL.premap (\r -> (r ^. GT.stateAbbreviation, r ^. BR.sLDUpperOnly)) FL.map)
                     <$> K.ignoreCacheTimeM stateAbbrCrosswalkLoader
 {-# INLINEABLE stateUpperOnlyMap #-}
 
 
-stateSingleCDMap :: (K.KnitEffects r, BRC.CacheEffects r) => K.Sem r (Map Text Bool)
+stateSingleCDMap :: (BRK.KnitEffects r, BRC.CacheEffects r) => K.Sem r (Map Text Bool)
 stateSingleCDMap = FL.fold (FL.premap (\r -> (r ^. GT.stateAbbreviation, r ^. BR.oneDistrict)) FL.map)
                    <$> K.ignoreCacheTimeM stateAbbrCrosswalkLoader
 {-# INLINEABLE stateSingleCDMap #-}
 
-stateAbbrFromFIPSMapLoader :: (K.KnitEffects r, BRC.CacheEffects r) => K.Sem r (Map Int Text)
+stateAbbrFromFIPSMapLoader :: (BRK.KnitEffects r, BRC.CacheEffects r) => K.Sem r (Map Int Text)
 stateAbbrFromFIPSMapLoader = do
   stateAbbrCrosswalk <- K.ignoreCacheTimeM stateAbbrCrosswalkLoader
   let assoc r = (view GT.stateFIPS r, view GT.stateAbbreviation r)
   pure $ FL.fold (FL.premap assoc FL.map) stateAbbrCrosswalk
 
-addStateAbbrUsingFIPS ::  (K.KnitEffects r, BRC.CacheEffects r, F.ElemOf rs GT.StateFIPS, FI.RecVec rs)
+addStateAbbrUsingFIPS ::  (BRK.KnitEffects r, BRC.CacheEffects r, F.ElemOf rs GT.StateFIPS, FI.RecVec rs)
                       => F.FrameRec rs -> K.Sem r (F.FrameRec (GT.StateAbbreviation ': rs))
 addStateAbbrUsingFIPS rs = do
   stateAbbrCrosswalk <- K.ignoreCacheTimeM stateAbbrCrosswalkLoader
@@ -296,7 +297,7 @@ type StateTurnoutColsRaw = F.RecordColumns BR.StateTurnout
 type StateTurnoutCols = [BR.Year, BR.State, GT.StateAbbreviation, BR.BallotsCountedVAP, BR.BallotsCountedVEP, BR.VotesHighestOffice, BR.VAP,BR.VEP,BR.PctNonCitizen,BR.Prison,BR.Probation, BR.Parole,BR.TotalIneligibleFelon, BR.OverseasEligible]
 
 stateTurnoutLoader ::
-  (K.KnitEffects r, BRC.CacheEffects r) =>
+  (BRK.KnitEffects r, BRC.CacheEffects r) =>
   K.Sem r (K.ActionWithCacheTime r (F.FrameRec StateTurnoutCols))
 stateTurnoutLoader =
   BRL.cachedMaybeFrameLoader @StateTurnoutColsRaw @_ @_ @StateTurnoutCols
@@ -344,7 +345,7 @@ processHouseElectionRow r = F.rcast @HouseElectionCols (mutate r)
         (FT.recordSingleton @BR.Runoff . FS.orMissing False id . F.rgetField @BR.RunoffOM)
 
 houseElectionsRawLoader ::
-  (K.KnitEffects r, BRC.CacheEffects r) =>
+  (BRK.KnitEffects r, BRC.CacheEffects r) =>
   K.Sem r (K.ActionWithCacheTime r (F.FrameRec HouseElectionCols))
 houseElectionsRawLoader = BRL.cachedFrameLoader
                           (useLocal $ toText BR.houseElectionsCSV)
@@ -354,7 +355,7 @@ houseElectionsRawLoader = BRL.cachedFrameLoader
                           Nothing
                           "houseElectionsRaw.bin"
 
-houseElectionsLoader ::   (K.KnitEffects r, BRC.CacheEffects r) =>
+houseElectionsLoader ::   (BRK.KnitEffects r, BRC.CacheEffects r) =>
   K.Sem r (K.ActionWithCacheTime r (F.FrameRec HouseElectionCols))
 houseElectionsLoader = do
   elexRaw_C <- houseElectionsRawLoader
@@ -362,7 +363,7 @@ houseElectionsLoader = do
 
 
 houseElectionsWithIncumbency ::
-  (K.KnitEffects r, BRC.CacheEffects r) =>
+  (BRK.KnitEffects r, BRC.CacheEffects r) =>
   K.Sem r (K.ActionWithCacheTime r (F.FrameRec HouseElectionColsI))
 houseElectionsWithIncumbency = do
   houseElex_C <- houseElectionsLoader
@@ -488,11 +489,11 @@ processSenateElectionRow r = F.rcast @SenateElectionCols (mutate r)
           (FT.recordSingleton @ET.Party . parsePEParty . F.rgetField @BR.SenatePartyDetailed)
 
 senateElectionsRawLoader ::
-  (K.KnitEffects r, BRC.CacheEffects r) =>
+  (BRK.KnitEffects r, BRC.CacheEffects r) =>
   K.Sem r (K.ActionWithCacheTime r (F.FrameRec SenateElectionCols))
 senateElectionsRawLoader = BRL.cachedFrameLoader (BRL.LocalData $ toText BR.senateElectionsCSV) Nothing Nothing processSenateElectionRow Nothing "senateElectionsRaw.bin"
 
-senateElectionsLoader ::   (K.KnitEffects r, BRC.CacheEffects r) =>
+senateElectionsLoader ::   (BRK.KnitEffects r, BRC.CacheEffects r) =>
   K.Sem r (K.ActionWithCacheTime r (F.FrameRec SenateElectionCols))
 senateElectionsLoader = do
   elexRaw_C <- senateElectionsRawLoader
@@ -500,7 +501,7 @@ senateElectionsLoader = do
 
 
 senateElectionsWithIncumbency ::
-  (K.KnitEffects r, BRC.CacheEffects r) =>
+  (BRK.KnitEffects r, BRC.CacheEffects r) =>
   K.Sem r (K.ActionWithCacheTime r (F.FrameRec SenateElectionColsI))
 senateElectionsWithIncumbency = do
   senateElex_C <- senateElectionsLoader
