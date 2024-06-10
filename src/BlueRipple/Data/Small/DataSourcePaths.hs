@@ -14,6 +14,9 @@ import qualified Language.Haskell.TH.Env as Env
 dataDir :: FilePath
 dataDir = fromMaybe "./data/" $ fmap toString $ ($$(Env.envQ "BR_SMALL_DATA_DIR")::Maybe String)  >>= BRC.insureFinalSlash . toText
 
+bigDataDir :: FilePath
+bigDataDir = fromMaybe "../../bigData/" $ fmap toString $ ($$(Env.envQ "BR_BIG_DATA_DIR") :: Maybe String) >>= BRC.insureFinalSlash . toText
+
 electionDir :: FilePath
 electionDir = dataDir ++ "election/"
 
@@ -78,6 +81,9 @@ houseElectionsRowGen = setOrMissingWhen $ FS.modifyColumnSelector modSelector rg
           , FS.tablePrefix = ""
           , FS.separator = FS.CharSeparator ','
           }
+
+tracts2022ByDistrict2024CSV :: FilePath
+tracts2022ByDistrict2024CSV = bigDataDir <> "tracts2022ByDistrict2024.csv"
 
 senateElectionsCSV :: FilePath
 senateElectionsCSV = electionDir ++ "1976-2020-senate_u1.csv"

@@ -46,6 +46,7 @@ F.declareColumn "StartDate" ''FP.FrameDay
 F.declareColumn "EndDate" ''FP.FrameDay
 F.declareColumn "ElectionDate" ''FP.FrameDay
 
+FS.tableTypes "TractsByDistrict" (framesPath tracts2022ByDistrict2024CSV)
 
 FS.tableTypes "TotalSpending" (framesPath totalSpendingCSV)
 

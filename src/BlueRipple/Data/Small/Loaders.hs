@@ -168,6 +168,15 @@ electionIntegrityByState2018 = BRL.cachedMaybeFrameLoader
               . (FT.addName @BR.PEIYear @BR.Year)
               . (FT.addName @BR.PEIStateFIPS @BR.StateFIPS)
 
+
+type TractsByDistrictR = [GT.StateAbbreviation, GT.StateFIPS, GT.DistrictTypeC, GT.DistrictName, GT.TractGeoId]
+
+tractsByDistrictLoader :: (BRK.KnitEffects r, BRC.CacheEffects r)
+                       => K.Sem r (K.ActionWithCacheTime r (F.FrameRec TractsByDistrictR))
+tractsByDistrictLoader = BRL.cachedFrameLoader
+  (BRL.LocalData $ toText $ BR.tracts2022ByDistrict2024CSV)
+  Nothing Nothing id Nothing "data/tracts2022ByDistricts2024.bin"
+
 -- starting with 118th congress/2022, we use 2020 PUMAs
 type CDFromPUMA2012R = FT.ReType BR.CongressionalDistrict GT.CongressionalDistrict
                        (FT.ReType BR.StateAbbreviation GT.StateAbbreviation
