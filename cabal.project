@@ -6,9 +6,8 @@ allow-newer: polysemy-zoo:ghc-prim, streamly-core
            , freer-simple:template-haskell
            , foldl-statistics:hashable, foldl-statistics:profunctors
            , cereal-time:time
-           , heidi:base
-           , generic-trie:base
            , discrimination:primitive
+           , bytestring, base
 
 flags: +streamly9
 

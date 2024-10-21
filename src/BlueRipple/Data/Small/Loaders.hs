@@ -231,9 +231,11 @@ rawStateAbbrCrosswalkLoader ::
 rawStateAbbrCrosswalkLoader = BRL.cachedFrameLoader (BRL.LocalData $ toText BR.statesCSV) Nothing Nothing id Nothing "statesRaw.bin"
 {-# INLINEABLE rawStateAbbrCrosswalkLoader #-}
 
+type StateXWalkR = [GT.StateName, GT.StateFIPS, GT.StateAbbreviation, GT.CensusRegionC, GT.CensusDivisionC, BR.OneDistrict, BR.SLDUpperOnly]
+
 stateAbbrCrosswalkLoader ::
   (BRK.KnitEffects r, BRC.CacheEffects r) =>
-  K.Sem r (K.ActionWithCacheTime r (F.FrameRec [GT.StateName, GT.StateFIPS, GT.StateAbbreviation, GT.CensusRegionC, GT.CensusDivisionC, BR.OneDistrict, BR.SLDUpperOnly]))
+  K.Sem r (K.ActionWithCacheTime r (F.FrameRec StateXWalkR))
 stateAbbrCrosswalkLoader = do
   statesRaw_C <- rawStateAbbrCrosswalkLoader
   BRC.retrieveOrMakeFrame "data/stateAbbr.bin" statesRaw_C $ \fRaw ->
