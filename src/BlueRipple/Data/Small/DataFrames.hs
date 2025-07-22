@@ -54,6 +54,7 @@ FS.tableTypes' (FS.rowGen (framesPath forecastAndSpendingCSV)) { FS.rowTypeName 
                                                                , FS.columnParsers = FS.parseableParseHowRec @FP.ColumnsWithDayAndLocalTime
                                                                }
 
+FS.tableTypes' prriRowGen
 FS.tableTypes "ElectionResults" (framesPath electionResultsCSV)
 FS.tableTypes "AngryDems" (framesPath angryDemsCSV)
 FS.tableTypes "AllMoney2020" (framesPath allMoney2020CSV)

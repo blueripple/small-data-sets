@@ -32,6 +32,33 @@ dictionariesDir = dataDir ++ "dictionaries/"
 otherDir :: FilePath
 otherDir = dataDir ++ "other/"
 
+prriCSV :: FilePath
+prriCSV = demographicDir ++ "PRRI_religion_2023.csv"
+
+
+prriRenames :: Map FS.HeaderText FS.ColTypeName
+prriRenames = M.fromList
+  [--(FS.HeaderText "FIPS-Code", FS.ColTypeName "CountyFIPS"),
+    (FS.HeaderText "All white Christians", FS.ColTypeName "WhiteChristianPct")
+    , (FS.HeaderText "White evangelical Protestant", FS.ColTypeName "WhiteEvangelicalPct")
+
+  ]
+
+prriRowGenAllCols :: FS.RowGen FS.DefaultStream 'FS.ColumnByName FS.CommonColumns
+prriRowGenAllCols = (FS.rowGen prriCSV) { FS.tablePrefix = "PRRI"
+                                        , FS.separator = FS.CharSeparator ','
+                                        , FS.rowTypeName = "PRRI"
+                                        }
+
+prriRowGen :: FS.RowGen FS.DefaultStream 'FS.ColumnByName FS.CommonColumns
+prriRowGen = FS.modifyColumnSelector modF prriRowGenAllCols
+  where
+    modF = FS.renameSomeUsingNames prriRenames . colSubset
+    colSubset = FS.columnSubset
+                $ S.fromList (FS.HeaderText <$>
+                              ["FIPS-Code", "All white Christians", "White evangelical Protestant"]
+                             )
+
 totalSpendingCSV :: FilePath
 totalSpendingCSV =
   campaignFinanceDir ++ "allSpendingThrough20181106.csv"

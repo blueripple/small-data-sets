@@ -41,6 +41,7 @@ import qualified Frames.MaybeUtils as FM
 import qualified Frames.Transform as FT
 import qualified Knit.Report as K
 import qualified Knit.Utilities.Streamly as KS
+import BlueRipple.Data.Small.DataFrames (PRRIWhiteChristianPct)
 
 useLocal :: Text -> BRL.DataPath
 useLocal = BRL.LocalData
@@ -520,3 +521,17 @@ senateElectionsWithIncumbency = do
   let g elex = fmap (let wm = winnerMap (F.rgetField @ET.Votes) senateElectionKey elex in addIncumbency 2 senateElectionKey sameCandidate isRunoff wm) elex
   --  K.clearIfPresent "data/houseWithIncumbency.bin"
   BRC.retrieveOrMakeFrame "data/senateWithIncumbency.bin" senateElex_C (return . g)
+
+
+type PRRIPreCols = [BR.PRRIFIPSCode, BR.PRRIWhiteChristianPct, BR.PRRIWhiteEvangelicalPct]
+type PRRICols = [GT.StateFIPS, GT.CountyFIPS, BR.PRRIWhiteChristianPct, BR.PRRIWhiteEvangelicalPct]
+prriLoader :: (BRK.KnitEffects r, BRC.CacheEffects r) => K.Sem r (K.ActionWithCacheTime r (F.FrameRec PRRICols))
+prriLoader = BRL.cachedMaybeFrameLoader @(F.RecordColumns BR.PRRI) (BRL.LocalData $ toText BR.prriCSV) (Just BR.pRRIParser) Nothing id processPRRIRow Nothing "prri_2023.bin"
+
+
+processPRRIRow :: F.Record PRRIPreCols -> F.Record PRRICols
+processPRRIRow r =
+  let prriFIPS = r ^. BR.pRRIFIPSCode
+      countyFIPS = prriFIPS `mod` 1000
+      stateFIPS = prriFIPS `div` 1000
+  in stateFIPS F.&: countyFIPS F.&: F.rcast @[BR.PRRIWhiteChristianPct, BR.PRRIWhiteEvangelicalPct] r

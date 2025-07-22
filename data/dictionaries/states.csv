@@ -1,7 +1,7 @@
 StateName,StateFIPS,StateAbbreviation,Region,Division,OneDistrict,SLDUpperOnly
 Alabama,1,AL,South,EastSouthCentral,FALSE,FALSE
 Alaska,2,AK,West,Pacific,TRUE,FALSE
-Arizona,4,AZ,West,Mountain,FALSE,TRUE
+Arizona,4,AZ,West,Mountain,FALSE,FALSE
 Arkansas,5,AR,South,WestSouthCentral,FALSE,FALSE
 California,6,CA,West,Pacific,FALSE,FALSE
 Colorado,8,CO,West,Mountain,FALSE,FALSE
@@ -11,7 +11,7 @@ District of Columbia,11,DC,South,SouthAtlantic,TRUE,FALSE
 Florida,12,FL,South,SouthAtlantic,FALSE,FALSE
 Georgia,13,GA,South,SouthAtlantic,FALSE,FALSE
 Hawaii,15,HI,West,Pacific,FALSE,FALSE
-Idaho,16,ID,West,Mountain,FALSE,TRUE
+Idaho,16,ID,West,Mountain,FALSE,FALSE
 Illinois,17,IL,Midwest,EastNorthCentral,FALSE,FALSE
 Indiana,18,IN,Midwest,EastNorthCentral,FALSE,FALSE
 Iowa,19,IA,Midwest,WestNorthCentral,FALSE,FALSE
@@ -29,7 +29,7 @@ Montana,30,MT,West,Mountain,FALSE,FALSE
 Nebraska,31,NE,Midwest,WestNorthCentral,FALSE,TRUE
 Nevada,32,NV,West,Mountain,FALSE,FALSE
 New Hampshire,33,NH,Northeast,NewEngland,FALSE,FALSE
-New Jersey,34,NJ,Northeast,MiddleAtlantic,FALSE,TRUE
+New Jersey,34,NJ,Northeast,MiddleAtlantic,FALSE,FALSE
 New Mexico,35,NM,West,Mountain,FALSE,FALSE
 New York,36,NY,Northeast,MiddleAtlantic,FALSE,FALSE
 North Carolina,37,NC,South,SouthAtlantic,FALSE,FALSE
@@ -46,7 +46,7 @@ Texas,48,TX,South,WestSouthCentral,FALSE,FALSE
 Utah,49,UT,West,Mountain,FALSE,FALSE
 Vermont,50,VT,Northeast,NewEngland,TRUE,FALSE
 Virginia,51,VA,South,SouthAtlantic,FALSE,FALSE
-Washington,53,WA,West,Pacific,FALSE,TRUE
+Washington,53,WA,West,Pacific,FALSE,FALSE
 West Virginia,54,WV,South,SouthAtlantic,FALSE,FALSE
 Wisconsin,55,WI,Midwest,EastNorthCentral,FALSE,FALSE
 Wyoming,56,WY,West,Mountain,TRUE,FALSE
