@@ -526,7 +526,7 @@ senateElectionsWithIncumbency = do
 type PRRIPreCols = [BR.PRRIFIPSCode, BR.PRRIWhiteChristianPct, BR.PRRIWhiteEvangelicalPct]
 type PRRICols = [GT.StateFIPS, GT.CountyFIPS, BR.PRRIWhiteChristianPct, BR.PRRIWhiteEvangelicalPct]
 prriLoader :: (BRK.KnitEffects r, BRC.CacheEffects r) => K.Sem r (K.ActionWithCacheTime r (F.FrameRec PRRICols))
-prriLoader = BRL.cachedMaybeFrameLoader @(F.RecordColumns BR.PRRI) (BRL.LocalData $ toText BR.prriCSV) (Just BR.pRRIParser) Nothing id processPRRIRow Nothing "prri_2023.bin"
+prriLoader = BRL.cachedFrameLoader @(F.RecordColumns BR.PRRI) (BRL.LocalData $ toText BR.prriCSV) (Just BR.pRRIParser) Nothing processPRRIRow Nothing "prri_2023.bin"
 
 
 processPRRIRow :: F.Record PRRIPreCols -> F.Record PRRICols
