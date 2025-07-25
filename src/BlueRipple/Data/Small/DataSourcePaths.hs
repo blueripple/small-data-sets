@@ -41,7 +41,7 @@ prriRenames = M.fromList
   [--(FS.HeaderText "FIPS-Code", FS.ColTypeName "CountyFIPS"),
     (FS.HeaderText "All white Christians", FS.ColTypeName "WhiteChristianPct")
     , (FS.HeaderText "White evangelical Protestant", FS.ColTypeName "WhiteEvangelicalPct")
-
+    , (FS.HeaderText "Mormon", FS.ColTypeName "MormonPct")
   ]
 
 prriRowGenAllCols :: FS.RowGen FS.DefaultStream 'FS.ColumnByName FS.CommonColumns
@@ -56,7 +56,7 @@ prriRowGen = FS.modifyColumnSelector modF prriRowGenAllCols
     modF = FS.renameSomeUsingNames prriRenames . colSubset
     colSubset = FS.columnSubset
                 $ S.fromList (FS.HeaderText <$>
-                              ["FIPS-Code", "All white Christians", "White evangelical Protestant"]
+                              ["FIPS-Code", "All white Christians", "White evangelical Protestant","Mormon"]
                              )
 
 totalSpendingCSV :: FilePath
