@@ -522,8 +522,8 @@ senateElectionsWithIncumbency = do
   BRC.retrieveOrMakeFrame "data/senateWithIncumbency.bin" senateElex_C (return . g)
 
 
-type PRRIPreCols = [BR.PRRIFIPSCode, BR.PRRIWhiteChristianPct, BR.PRRIWhiteEvangelicalPct, BR.PRRIMormonPct]
-type PRRICols = [GT.StateFIPS, GT.CountyFIPS, BR.PRRIWhiteChristianPct, BR.PRRIWhiteEvangelicalPct, BR.PRRIMormonPct]
+type PRRIPreCols = [BR.PRRIFIPSCode, BR.PRRIPopulation, BR.PRRIWhiteChristianPct, BR.PRRIWhiteEvangelicalPct, BR.PRRIMormonPct]
+type PRRICols = [GT.StateFIPS, GT.CountyFIPS, BR.Population, BR.PRRIWhiteChristianPct, BR.PRRIWhiteEvangelicalPct, BR.PRRIMormonPct]
 prriLoader :: (BRK.KnitEffects r, BRC.CacheEffects r) => K.Sem r (K.ActionWithCacheTime r (F.FrameRec PRRICols))
 prriLoader = BRL.cachedFrameLoader @(F.RecordColumns BR.PRRI) (BRL.LocalData $ toText BR.prriCSV) (Just BR.pRRIParser) Nothing processPRRIRow Nothing "prri_2023.bin"
 
@@ -533,4 +533,4 @@ processPRRIRow r =
   let prriFIPS = r ^. BR.pRRIFIPSCode
       countyFIPS = prriFIPS `mod` 1000
       stateFIPS = prriFIPS `div` 1000
-  in stateFIPS F.&: countyFIPS F.&: F.rcast @[BR.PRRIWhiteChristianPct, BR.PRRIWhiteEvangelicalPct, BR.PRRIMormonPct] r
+  in stateFIPS F.&: countyFIPS F.&: r ^. BR.pRRIPopulation F.&: F.rcast @[BR.PRRIWhiteChristianPct, BR.PRRIWhiteEvangelicalPct, BR.PRRIMormonPct] r

@@ -56,7 +56,7 @@ prriRowGen = FS.modifyColumnSelector modF prriRowGenAllCols
     modF = FS.renameSomeUsingNames prriRenames . colSubset
     colSubset = FS.columnSubset
                 $ S.fromList (FS.HeaderText <$>
-                              ["FIPS-Code", "All white Christians", "White evangelical Protestant","Mormon"]
+                              ["FIPS-Code", "Population", "All white Christians", "White evangelical Protestant","Mormon"]
                              )
 
 totalSpendingCSV :: FilePath
