@@ -22,6 +22,7 @@ where
 
 import Prelude hiding (State)
 import           BlueRipple.Data.Small.DataSourcePaths
+--import           BlueRipple.Data.Types.Geographic hiding (DistrictType)
 
 import qualified Frames                        as F
 
@@ -101,6 +102,7 @@ FS.tableTypes "EdisonExit2018" (framesPath exitPoll2018CSV)
 FS.tableTypes "ElectoralCollege" (framesPath electorsCSV)
 
 FS.tableTypes "States" (framesPath statesCSV)
+FS.tableTypes "CountyFIPSXWalk" (framesPath countyFIPSCSV)
 FS.tableTypes "StateCountyCD" (framesPath stateCounty116CDCSV)
 FS.tableTypes "StateCountyTractPUMA" (framesPath stateCountyTractPUMACSV)
 FS.tableTypes "CountyToCD116" (framesPath countyToCD116CSV)

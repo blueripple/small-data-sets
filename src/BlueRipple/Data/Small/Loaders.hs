@@ -40,6 +40,8 @@ import qualified Frames.Melt as F
 import qualified Frames.MaybeUtils as FM
 import qualified Frames.Transform as FT
 import qualified Knit.Report as K
+import qualified Knit.Report.Cache as KC
+import qualified Knit.Effect.AtomicCache as KAC
 import qualified Knit.Utilities.Streamly as KS
 
 useLocal :: Text -> BRL.DataPath
@@ -241,6 +243,39 @@ stateAbbrCrosswalkLoader = do
   BRC.retrieveOrMakeFrame "data/stateAbbr.bin" statesRaw_C $ \fRaw ->
     K.knitEither $ F.toFrame <$> (traverse parseCensusCols $ FL.fold FL.list fRaw)
 {-# INLINEABLE stateAbbrCrosswalkLoader #-}
+
+type CountyXWalkR = [BR.CountyGEOID, BR.CountyName, BR.CountyNameLSAD]
+
+countyFIPS_FrameLoader :: (BRK.KnitEffects r, BRC.CacheEffects r)
+                       => K.Sem r (K.ActionWithCacheTime r (F.FrameRec CountyXWalkR))
+countyFIPS_FrameLoader = BRL.cachedFrameLoader (BRL.LocalData $ toText BR.countyFIPSCSV) Nothing Nothing id Nothing "countyFIPSRaw.bin"
+
+countyFIPS_CrosswalkLoader :: (BRK.KnitEffects r, BRC.CacheEffects r)
+                           => K.Sem r (K.ActionWithCacheTime r (Map Int (Map Int (Text, Text))))
+countyFIPS_CrosswalkLoader = do
+  let f m stateFIPS countyFIPS name nameLSAD = M.insert stateFIPS x m where
+        x = case M.lookup stateFIPS m of
+              Nothing -> M.singleton countyFIPS (name, nameLSAD)
+              Just cm -> M.insert countyFIPS (name, nameLSAD) cm
+      g m r = f m sf cf (r ^. BR.countyName) (r ^. BR.countyNameLSAD) where
+        (sf, cf) = GT.stateCountyFIPSFromCountyGeoId (r ^. BR.countyGEOID)
+  countyFIPSFrame_C <- countyFIPS_FrameLoader
+  KC.retrieveOrMake "countyFIPS.bin" countyFIPSFrame_C $ pure . foldl' g mempty
+
+
+countyFIPSByStateAbbreviation_CrosswalkLoader ::  (BRK.KnitEffects r, BRC.CacheEffects r)
+                                              => K.Sem r (K.ActionWithCacheTime r (Map Text (Map Int (Text, Text))))
+countyFIPSByStateAbbreviation_CrosswalkLoader = do
+  countyFIPSCW_C <- countyFIPS_CrosswalkLoader
+  stateXWalk_C <- stateAbbrCrosswalkLoader
+  let deps = (,) <$>  countyFIPSCW_C <*> stateXWalk_C
+
+  pure $ flip KAC.wctBind deps $ \(cf, sx) -> do
+    let saByFIPSMap = FL.fold (FL.premap (\r -> (r ^. GT.stateFIPS, r ^. GT.stateAbbreviation)) FL.map) sx
+        fipsToSA (fips, x) = case M.lookup fips saByFIPSMap of
+          Nothing -> Left $ "countyFIPSByStateAbbreviation_CrosswalkLoader: Missing fips=" <> show fips <> " in stateXwalk"
+          Just sa -> Right (sa, x)
+    K.knitEither $ fmap M.fromList $ traverse fipsToSA $ M.toList cf
 
 stateUpperOnlyMap :: (BRK.KnitEffects r, BRC.CacheEffects r) => K.Sem r (Map Text Bool)
 stateUpperOnlyMap = FL.fold (FL.premap (\r -> (r ^. GT.stateAbbreviation, r ^. BR.sLDUpperOnly)) FL.map)

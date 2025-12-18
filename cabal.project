@@ -1,4 +1,4 @@
-packages: ./
+packages: ./ ~/BlueRipple/libs/data-types
 jobs: 4
 with-compiler: ghc
 
@@ -11,7 +11,7 @@ flags: +streamly9
 import: ../cabal_repo_imports/data-tools.project
 import: ../cabal_repo_imports/post-tools.project
 import: ../cabal_repo_imports/data-loading.project
-import: ../cabal_repo_imports/data-types.project
+--import: ../cabal_repo_imports/data-types.project
 import: ../cabal_repo_imports/knit-haskell.project
 import: ../cabal_repo_imports/Frames-streamly.project
 import: ../cabal_repo_imports/Frames-serialize.project
